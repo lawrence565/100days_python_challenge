@@ -1,5 +1,4 @@
 # Modifying Global Scope
-
 enemies = 1
 
 

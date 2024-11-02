@@ -30,3 +30,4 @@ resources = {
     "coffee": 100,
 }
 
+# Todo 1: Print the receipt base on the input
