@@ -36,7 +36,7 @@ money = 0
 
 def choose_coffee():
     chosen = ""
-    while chosen not in ["espresso", "latte", "cappuccino"]:
+    while chosen not in ["espresso", "latte", "cappuccino", "off"]:
         chosen = input("WHat would you like? (Espresso/Latte/Cappuccino): ").lower()
         if chosen == "report":
             print("Water:", resources["water"])
@@ -45,19 +45,16 @@ def choose_coffee():
             print("Money: $" + str(money))
     return chosen
 
-def check_sufficient(water, milk, coffee):
-    if water < resources["water"] and coffee < resources["coffee"] and milk < resources["milk"]:
-        return True
-    else:
-        if water > resources["water"]:
-            print("Sorry that's not enough water.")
-        if coffee > resources["coffee"]:
-            print("Sorry that's not enough coffee.")
-        if milk > resources["milk"]:
-            print("Sorry that's not enough milk.")
-        return False
+def check_sufficient(order_ingredient):
+    """Receive ingredients of coffe and return if resources are sufficient."""
+    for item in order_ingredient:
+        if order_ingredient[item] > resources[item]:
+            print(f"Sorry that's not enough {item}.")
+            return False
+    return True
 
 def get_coin():
+    """Receive coins and return the value of them"""
     quarters = int(input("How many quarters?: "))
     dimes = int(input("How many dimes?: "))
     nickles = int(input("How many nickles?: "))
@@ -67,10 +64,14 @@ def get_coin():
     return coins
 
 def main():
-    running = True
     global money
+    running = True
     while running:
         chosen_coffee = choose_coffee()
+        if chosen_coffee == 'off':
+            running = False
+            print("Thanks for using.")
+            continue
 
         water = MENU[chosen_coffee]["ingredients"]["water"]
         milk = 0
@@ -81,7 +82,7 @@ def main():
         coffee = MENU[chosen_coffee]["ingredients"]["coffee"]
         price = MENU[chosen_coffee]["cost"]
 
-        if check_sufficient(water, milk, coffee):
+        if check_sufficient(MENU[chosen_coffee]["ingredients"]):
             print("Please insert coin.")
         else:
             continue
