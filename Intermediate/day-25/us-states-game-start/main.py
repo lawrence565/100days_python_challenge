@@ -31,7 +31,20 @@ guessed_state = []
 state_list = state_data["state"].to_list()
 
 while game_is_on:
-    answer_state = screen.textinput(title="Guess a state", prompt="What's another state's name?")
+    answer_state = screen.textinput(title="Guess a state", prompt="What's another state's name?").title()
+
+    if answer_state == "Exit":
+        missed_state = []
+        for state in state_list:
+            if state not in guessed_state:
+                missed_state.append(state)
+
+        state_to_learn = pandas.DataFrame(missed_state)
+        state_to_learn.to_csv("State to learn.csv")
+
+    break
+
+
     if answer_state in state_list:
         state_name = StateName()
         guessed_state.append(answer_state)
@@ -41,7 +54,12 @@ while game_is_on:
         x = state_data[state_data.state == answer_state].x.item()
         y = state_data[state_data.state == answer_state].y.item()
         state_name.show_state(answer_state, (x, y))
-    game_is_on = False
+
+    if len(guessed_state) == 50:
+        game_is_on = False
+        success = StateName()
+        success.goto(0, 200)
+        success.write("You win the game!")
 
 
 turtle.onscreenclick(get_mouse_click_coor)
