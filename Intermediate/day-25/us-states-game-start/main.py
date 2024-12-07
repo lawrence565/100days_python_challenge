@@ -41,8 +41,7 @@ while game_is_on:
 
         state_to_learn = pandas.DataFrame(missed_state)
         state_to_learn.to_csv("State to learn.csv")
-
-    break
+        break
 
 
     if answer_state in state_list:
