@@ -34,10 +34,9 @@ while game_is_on:
     answer_state = screen.textinput(title="Guess a state", prompt="What's another state's name?").title()
 
     if answer_state == "Exit":
-        missed_state = []
-        for state in state_list:
-            if state not in guessed_state:
-                missed_state.append(state)
+
+        # Applied the code with list comprehension
+        missed_state = [state for state in state_data if state not in guessed_state]
 
         state_to_learn = pandas.DataFrame(missed_state)
         state_to_learn.to_csv("State to learn.csv")
