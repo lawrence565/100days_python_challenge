@@ -21,7 +21,6 @@ def reset():
     time_label.config(text="Timer")
     rounds = 0
 
-
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer():
     global rounds
