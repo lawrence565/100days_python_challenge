@@ -61,7 +61,6 @@ def add_pixel():
 def update_pixel():
     today = datetime.datetime.today()
     format_day = today.strftime("%Y%m%d")
-
     endpoint = f"{pixela_endpoint}/{USER}/graphs/{graph_id}/{format_day}"
 
     graph_config = {
