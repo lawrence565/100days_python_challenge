@@ -9,8 +9,6 @@ AUTH_TOKEN= os.getenv("AUTH_TOKEN")
 account_sid = ACCOUNT_SID
 auth_token = AUTH_TOKEN
 
-
-
 MY_LAT = os.getenv("MY_LAT")
 MY_LNG = os.getenv("MY_LNG")
 MY_API_KEY = os.getenv("MY_API_KEY")
