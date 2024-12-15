@@ -47,7 +47,7 @@ def get_stock_data(stock):
     #     day = day + timedelta(days=-1)
 
     # Translate data to a useful list
-    stock_price_list = [value for (key, value) in stock.itmes()]
+    stock_price_list = [value for (key, value) in stock.items()]
     return stock_price_list
 
 
@@ -98,12 +98,12 @@ def send_sms(contents, direction, gap):
     for sms in sms_content_list:
         print(sms)
 
-    # message = client.messages.create(
-    #     from_='+12707173309',
-    #     body=content,
-    #     to='+886903199009'
-    # )
-    # print(message.sid)
+    message = client.messages.create(
+        from_='+12707173309',
+        body=sms,
+        to='+886903199009'
+    )
+    print(message.sid)
 
 
 stock_price = get_stock_data(stock_data)
