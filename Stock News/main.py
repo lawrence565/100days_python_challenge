@@ -1,11 +1,9 @@
-import requests, os, dotenv, sys, datetime, math
-from future.backports.datetime import timedelta
+import requests, os, dotenv, sys, datetime
 from twilio.rest import Client
-from xlwings.constants import directions
 
 dotenv.load_dotenv()
 
-MY_API_KEY = os.getenv("MY_API_KEY")
+STOCK_API_KEY = os.getenv("STOCK_API_KEY")
 MY_NEWS_API = os.getenv("MY_NEWS_API")
 ACCOUNT_SID = os.getenv("ACCOUNT_SID")
 AUTH_TOKEN = os.getenv("AUTH_TOKEN")
@@ -21,7 +19,7 @@ auth_token = AUTH_TOKEN
 params = {
     "function": "TIME_SERIES_DAILY",
     "symbol": STOCK,
-    "apikey": MY_API_KEY,
+    "apikey": STOCK_API_KEY,
 }
 response = requests.get(url="https://www.alphavantage.co/query", params=params)
 response.raise_for_status()
@@ -96,15 +94,12 @@ def send_sms(contents, direction, gap):
     sms_content_list = [f"\n{STOCK}: {direction} {gap}%\n{content}" for content in contents]
 
     for sms in sms_content_list:
-        print(sms)
-
-    message = client.messages.create(
-        from_='+12707173309',
-        body=sms,
-        to='+886903199009'
-    )
-    print(message.sid)
-
+        message = client.messages.create(
+            from_='+12707173309',
+            body=sms,
+            to='+886903199009'
+        )
+        print(message.sid)
 
 stock_price = get_stock_data(stock_data)
 stock_status = price_gap_high(stock_price)
