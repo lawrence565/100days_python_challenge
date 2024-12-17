@@ -86,7 +86,7 @@ class FlightSearch:
 
         return code
 
-    def check_flight(self, origin_city_code, destination_city_code, from_time, to_time):
+    def check_flight(self, origin_city_code, destination_city_code, is_direct, from_time, to_time):
         """
         Searches for flight options between two cities on specified departure and return dates
         using the Amadeus API.
@@ -115,7 +115,7 @@ class FlightSearch:
             "departureDate": from_time.strftime("%Y-%m-%d"),
             "returnDate": to_time.strftime("%Y-%m-%d"),
             "adults": 1,
-            "nonStop": "true",
+            "nonStop": is_direct,
             "currencyCode": "TWD",
             "max": "10",
         }
@@ -131,8 +131,9 @@ class FlightSearch:
             print("Response body:", res.text)
             return None
 
+        # print(res.json())
         return res.json()
 
-flight_search = FlightSearch()
-tomorrow = datetime.today() + timedelta(days=1)
-flight_search.check_flight("TPE", 'NRT', tomorrow, tomorrow + timedelta(days=6 * 30))
+# flight_search = FlightSearch()
+# tomorrow = datetime.today() + timedelta(days=1)
+# flight_search.check_flight("TPE", 'IMP', is_direct="false", from_time=tomorrow, to_time=tomorrow + timedelta(days=6 * 30))
