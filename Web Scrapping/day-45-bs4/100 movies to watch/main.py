@@ -8,4 +8,9 @@ soup = BeautifulSoup(res.text, "html.parser")
 
 title_list = soup.findAll(name="h3", class_="title")
 title_list = [title.getText() for title in title_list]
-print(title_list)
+title_list = title_list[::-1]
+
+with open("movie.txt", mode="w") as file:
+    for title in title_list:
+        file.writelines(title + "\n")
+
