@@ -3,6 +3,8 @@
 __pycache__
 .venv
 .env
+token.txt
+.cache
 
 Coffee+Machine+Program+Requirements.pdf
 course-info.yaml
