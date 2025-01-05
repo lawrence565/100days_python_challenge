@@ -17,8 +17,6 @@ app.config['SECRET_KEY'] = getenv('SECRET')
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///books.db"
 bootstrap = Bootstrap5(app)
 
-
-# SQLAlchemy Application
 class BookForm(FlaskForm):
     book = StringField('Book', validators=[DataRequired()])
     arthur = StringField('Arthur', validators=[DataRequired()])
@@ -27,6 +25,7 @@ class BookForm(FlaskForm):
                                       validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+# SQLAlchemy Application
 class Base(DeclarativeBase):
   pass
 
@@ -34,10 +33,10 @@ db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
 class Book(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    title: Mapped[str] = mapped_column(unique=True, nullable=False)
-    author: Mapped[str] = mapped_column(nullable=False)
-    rating: Mapped[int] = mapped_column(nullable=False)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    title: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
+    author: Mapped[str] = mapped_column(String(250), nullable=False)
+    rating: Mapped[int] = mapped_column(Integer, nullable=False)
 
 with app.app_context():
     db.create_all()
@@ -55,10 +54,7 @@ def add():
     form = BookForm()
 
     if request.method == 'POST' and form.validate_on_submit():
-        book = form.book.data
-        author = form.arthur.data
-        rating = form.rating.data
-        new_book = {'title': book, 'author': author, 'rating': rating}
+
         book = Book(
             title=form.book.data,
             author=form.arthur.data,
