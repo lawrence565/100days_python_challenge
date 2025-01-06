@@ -67,7 +67,27 @@ def add():
 
     return render_template('add.html', form=form)
 
+@app.route('/edit/<_id>', methods=['GET', 'POST'])
+def edit_rating(_id):
+    rating = request.form.get('rating')
+    if request.method == 'POST':
+        db.session.execute(db.update(Book).where(Book.id == _id).values(rating=rating))
+        db.session.commit()
+
+        return redirect("/")
+
+    book = db.session.execute(db.select(Book).where(Book.id == _id)).scalar()
+    return render_template('edit.html', book=book)
+
+@app.route('/delete/<_id>')
+def delete_book(_id):
+
+    print('Delete', _id)
+    db.session.execute(db.delete(Book).where(Book.id == _id))
+    db.session.commit()
+
+    return redirect("/")
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
 

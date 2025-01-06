@@ -12,6 +12,8 @@
       {% else %}
       {% for book in books %}
       <li>{{ book['title'] }} - {{ book['author'] }} - {{ book['rating'] }}/5</li>
+      <a href="/edit/{{ book.id }}">Edit Rating</a>
+      <a href="/delete/{{ book.id }}">Delete</a>
       {% endfor %}
       {% endif %}
     </ul>

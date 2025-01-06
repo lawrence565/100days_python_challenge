@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add Book</title>
+</head>
+<body>
+{% from 'bootstrap5/form.html' import render_form %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+
+            <h1>Edit rating of the book</h1>
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.author }}</p>
+            <form action="/edit/{{ book.id }}" method="post">
+                <label for="rating">Rating</label>
+                <input type="text" name="rating" required/>
+                <button type="submit">submit</button>
+            </form>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
