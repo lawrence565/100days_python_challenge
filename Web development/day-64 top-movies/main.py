@@ -86,6 +86,31 @@ def add_movie():
 
     return render_template('add.html', form=form)
 
+@app.route("/edit/<_id>", methods=['GET', 'POST'])
+def edit_movie(_id):
+    movie = db.session.execute(db.select(Movie).where(Movie.id == _id)).scalar()
+    form = MovieForm(obj=movie)
+
+    if request.method == 'POST' and form.validate_on_submit():
+        movie.title = form.title.data
+        movie.year = form.year.data
+        movie.description = form.description.data
+        movie.rating = form.rating.data
+        movie.ranking = form.ranking.data
+        movie.review = form.review.data
+        movie.img_url = form.img_url.data
+
+        db.session.commit()  # 提交更改
+        return redirect("/")
+
+    return render_template('edit.html', form=form)
+
+@app.route("/delete/<_id>", methods=['GET'])
+def delete_movie(_id):
+    db.session.execute(db.delete(Movie).where(Movie.id == _id))
+
+    return redirect("/")
+
 
 if __name__ == '__main__':
     app.run(debug=True)
