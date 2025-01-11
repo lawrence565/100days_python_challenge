@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Cafe</title>
+</head>
+<body>
+<h1>Add Cafe to database</h1>
+<form action="/add" method="post">
+    <label for="name">Cafe's Name: </label>
+    <input name="name" type="text">
+    <br>
+    <label for="map_url">Cafe's Map URL: </label>
+    <input name="map_url" type="text">
+    <br>
+    <label for="img_url">Cafe's Image URL: </label>
+    <input name="img_url" type="text">
+    <br>
+    <label for="location">Cafe's Location: </label>
+    <input name="location" type="text">
+    <br>
+    <label for="seats">How many seats are there in the cafe</label>
+    <input name="seats" type="text">
+    <br>
+    <label for="has_toilet">Has Toilet</label>
+    <select name="has_toilet">
+        <option value="true">True</option>
+        <option value="false">False</option>
+    </select>
+    <br>
+    <label for="has_wifi">Has Wifi</label>
+    <select name="has_wifi">
+        <option value="true">True</option>
+        <option value="false">False</option>
+    </select>
+    <br>
+    <label for="has_sockets">Has Socket</label>
+    <select name="has_sockets">
+        <option value="true">True</option>
+        <option value="false">False</option>
+    </select>
+    <br>
+    <label for="can_take_calls">Can take calls</label>
+    <select name="can_take_calls">
+        <option value="true">True</option>
+        <option value="false">False</option>
+    </select>
+    <br>
+    <label for="coffee_price">Coffee Price</label>
+    <input name="coffee_price" type="text">
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
