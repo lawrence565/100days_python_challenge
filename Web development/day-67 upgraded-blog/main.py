@@ -115,7 +115,6 @@ def edit_post(post_id):
     if request.method == 'POST' and form.validate_on_submit():
         post.title = form.title.data
         post.subtitle = form.subtitle.data
-        post.date = date.today()
         post.body = form.body.data
         post.author = form.author.data
         post.img_url = form.img_url.data
